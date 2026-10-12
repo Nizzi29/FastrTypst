@@ -120,6 +120,7 @@ pub const MAX_LEVEL: f32 = 10.0;
 
 impl Profile {
     pub fn load() -> Self {
+        storage::migrate_old_name();
         let mut config = Config::load();
         match storage::migrate_legacy(&config) {
             Ok(Some(settings)) => {

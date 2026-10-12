@@ -1,9 +1,9 @@
-# FasterTypst
+# FastrTypst
 
 A monkeytype-style trainer for typing math formulas in [Typst](https://typst.app),
 focused on electrical engineering notation (German/DIN conventions).
 
-FasterTypst is an unofficial community project and is not affiliated with Typst GmbH.
+FastrTypst is an unofficial community project and is not affiliated with Typst GmbH.
 It embeds the Typst compiler as a library to render and check formulas.
 
 Requires Rust 1.95 or newer ([rustup](https://rustup.rs)):
@@ -36,14 +36,14 @@ speed and errors. Constructs you are slow at (fractions, `underline`, `integral.
 ## Progress and syncing between devices
 
 Each device appends its attempts to its own `attempts-<device>.jsonl` in the data
-folder (default `~/.local/share/fastertypst/`). Every log in that folder is merged on
+folder (default `~/.local/share/fastrtypst/`). Every log in that folder is merged on
 startup and before each formula, and the difficulty level is replayed from the merged
 history. Settings such as mode and DIN strictness stay per device, in
-`~/.config/fastertypst/config.json`.
+`~/.config/fastrtypst/config.json`.
 
 To practice on several machines, open **Statistics → Sync between devices** on each
 one and point it at the same folder inside a folder synced by Nextcloud, Syncthing,
-Dropbox or similar, e.g. `~/Nextcloud/FasterTypst`. This device's log moves there. Since no file is ever
+Dropbox or similar, e.g. `~/Nextcloud/FastrTypst`. This device's log moves there. Since no file is ever
 written by two devices, syncing never produces conflicts, even if a device practices
 offline. A pre-sync `profile.json` is migrated automatically and kept as
 `profile.json.migrated`.
@@ -51,7 +51,7 @@ offline. A pre-sync `profile.json` is migrated automatically and kept as
 Build the app on each machine instead of syncing the binary:
 
 ```sh
-cargo install --locked --path .   # installs ~/.cargo/bin/fastertypst
+cargo install --locked --path .   # installs ~/.cargo/bin/fastrtypst
 ```
 
 If the project folder itself is inside a synced folder, keep cargo's multi-gigabyte

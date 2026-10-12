@@ -1,11 +1,11 @@
 [package]
-name = "fastertypst"
+name = "fastrtypst"
 version = "0.1.0"
 edition = "2024"
 rust-version = "1.95"
 description = "A monkeytype-style trainer for typing math formulas in Typst, focused on electrical engineering"
 license = "MIT OR Apache-2.0"
-repository = "https://github.com/Nizzi29/FasterTypst"
+repository = "https://github.com/Nizzi29/FastrTypst"
 readme = "README.md"
 keywords = ["typst", "typing", "math", "trainer", "egui"]
 categories = ["games", "science"]

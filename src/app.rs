@@ -227,7 +227,7 @@ impl App {
 
     fn top_bar(&mut self, ui: &mut egui::Ui) {
         ui.horizontal(|ui| {
-            ui.heading("FasterTypst");
+            ui.heading("FastrTypst");
             ui.separator();
             let before = self.mode();
             let settings = &mut self.profile.config.settings;
@@ -532,7 +532,7 @@ impl App {
                 let field = ui.add(
                     egui::TextEdit::singleline(sync_input)
                         .id(sync_field_id())
-                        .hint_text("~/Nextcloud/FasterTypst")
+                        .hint_text("~/Nextcloud/FastrTypst")
                         .desired_width(260.0),
                 );
                 let entered = field.lost_focus() && ui.input(|i| i.key_pressed(Key::Enter));

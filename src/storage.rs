@@ -19,12 +19,30 @@ use crate::stats::{Attempt, Settings};
 
 const LOG_PREFIX: &str = "attempts-";
 const LOG_SUFFIX: &str = ".jsonl";
+const APP_DIR: &str = "fastrtypst";
+/// Folder name before the project was renamed from FasterTypst.
+const OLD_APP_DIR: &str = "fastertypst";
 
 fn dirs() -> Option<directories::ProjectDirs> {
-    directories::ProjectDirs::from("", "", "fastertypst")
+    directories::ProjectDirs::from("", "", APP_DIR)
 }
 
-/// `~/.local/share/fastertypst`, used when no sync folder is set.
+/// Moves config and data folders from before the rename to the new name.
+pub fn migrate_old_name() {
+    let (Some(new), Some(old)) = (dirs(), directories::ProjectDirs::from("", "", OLD_APP_DIR)) else {
+        return;
+    };
+    for (from, to) in [(old.config_dir(), new.config_dir()), (old.data_dir(), new.data_dir())] {
+        if from.exists() && !to.exists() {
+            let moved = fs::create_dir_all(to.parent().unwrap()).and_then(|()| fs::rename(from, to));
+            if let Err(e) = moved {
+                eprintln!("could not move {} to {}: {e}", from.display(), to.display());
+            }
+        }
+    }
+}
+
+/// `~/.local/share/fastrtypst`, used when no sync folder is set.
 pub fn local_data_dir() -> PathBuf {
     dirs().map(|d| d.data_dir().to_path_buf()).unwrap_or_else(|| PathBuf::from("."))
 }
@@ -40,7 +58,7 @@ pub fn expand_home(path: &str) -> PathBuf {
     }
 }
 
-/// Per-device configuration (`~/.config/fastertypst/config.json`).
+/// Per-device configuration (`~/.config/fastrtypst/config.json`).
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 #[serde(default)]
 pub struct Config {
@@ -269,7 +287,7 @@ mod tests {
     }
 
     fn temp_dir(name: &str) -> PathBuf {
-        let dir = std::env::temp_dir().join(format!("fastertypst-test-{name}-{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("fastrtypst-test-{name}-{}", std::process::id()));
         let _ = fs::remove_dir_all(&dir);
         fs::create_dir_all(&dir).unwrap();
         dir
