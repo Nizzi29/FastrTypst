@@ -1,0 +1,27 @@
+[package]
+name = "fastertypst"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.95"
+description = "A monkeytype-style trainer for typing math formulas in Typst, focused on electrical engineering"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/Nizzi29/FasterTypst"
+readme = "README.md"
+keywords = ["typst", "typing", "math", "trainer", "egui"]
+categories = ["games", "science"]
+
+[dependencies]
+comemo = "0.5.1"
+directories = "6.0.0"
+eframe = "0.36"
+rand = "0.9"
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+typst = "0.15.1"
+typst-assets = { version = "0.15.1", features = ["fonts"] }
+typst-layout = "0.15.1"
+typst-render = "0.15.1"
+
+# Typst is slow without optimizations; optimize dependencies even in debug builds.
+[profile.dev.package."*"]
+opt-level = 2
